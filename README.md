@@ -11,6 +11,7 @@ Yêu cầu cần có:
 ## Usage
 
 1. chạy dòng lệnh để cài đặt các modules của dự án
+
 ```bash
 npm install
 ```
@@ -30,3 +31,11 @@ NAME_DB=sakila
 ```bash
 npm run dev
 ```
+
+## Docment & References
+
+[API] - [Docs API](https://documenter.getpostman.com/view/9223681/2s93sW8vKA)
+
+[PRE] - [Typescript Deep Dive](https://basarat.gitbook.io/typescript/)
+
+[PRE] - [Mysql2](https://github.com/sidorares/node-mysql2#readme)

@@ -1,7 +1,9 @@
+import { IFilm } from "../interfaces/IFilm.interface";
+import { ILevel1Service } from "../interfaces/ILevel1.interface";
 import { ActorRepository } from "../repositories/Actor.repository";
 import { FilmRepository } from "../repositories/Film.repository";
 
-export class Level1Service {
+export class Level1Service implements ILevel1Service {
   constructor(
     private actorRepository: ActorRepository = new ActorRepository(),
     private filmRepository: FilmRepository = new FilmRepository()
@@ -18,7 +20,25 @@ export class Level1Service {
     return rows;
   }
 
-  async bai3() {}
+  async bai3() {
+    const rows =
+      await this.filmRepository.getTop5FilmWithTheNumberOfTimesRented();
+    return rows;
+  }
 
-  async bai4() {}
+  async bai4() {
+    const rows = this.filmRepository.getAvergeRentalForEachCategoryOfFilm();
+    return rows;
+  }
+
+  async bai7() {
+    const rows = this.actorRepository.getAllActorsAppearedMoreThan20Films();
+    return rows;
+  }
+
+  async bai8() {
+    const rows =
+      this.filmRepository.getTitlesAllFilmsHaveRatingPG13AndLengthMoreThan120();
+    return rows;
+  }
 }
