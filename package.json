@@ -10,7 +10,7 @@
     "dev": "nodemon app.ts",
     "lint": "eslint --ext .ts,.tsx ./src",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx}'",
-    "fix": "npm format && yarn lint:fix",
+    "fix": "npm run format && yarn lint:fix",
     "lint:fix": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "fix:eslint": "eslint src --ext .js,.ts,.jsx,.tsx --fix",
     "fix:prettier": "prettier --write ."
