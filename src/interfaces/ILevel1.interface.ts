@@ -1,5 +1,5 @@
-import { IFilm } from "./IFilm.interface";
 import { IActor } from "./IActor.interface";
+import { IFilm } from "./IFilm.interface";
 
 export interface ILevel1Service {
   bai1(): Promise<IActor[]>;

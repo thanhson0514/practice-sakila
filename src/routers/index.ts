@@ -16,5 +16,8 @@ router.get("/level1/bai8/query", level1.bai8);
 
 // router for level2
 router.get("/level2/bai1/query", level2.bai1);
+router.get("/level2/bai2/query", level2.bai2);
+router.get("/level2/bai3/query", level2.bai3);
+router.get("/level2/bai4/query", level2.bai4);
 
 export default router;

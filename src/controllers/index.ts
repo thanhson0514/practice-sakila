@@ -1,5 +1,3 @@
-import fs from "fs";
-
 import { Level1Controller } from "./Level1.controller";
 import { Level2Controller } from "./Level2.controller";
 

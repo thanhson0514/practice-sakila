@@ -28,7 +28,6 @@ export class Level1Controller {
         results: rows,
       });
     } catch (error: any) {
-      console.log(error);
       next(new ErrorResponse(error["message"], 500));
     }
   };
@@ -42,7 +41,6 @@ export class Level1Controller {
         results: rows,
       });
     } catch (error: any) {
-      console.log(error);
       next(new ErrorResponse(error["message"], 500));
     }
   };
@@ -56,7 +54,6 @@ export class Level1Controller {
         results: rows,
       });
     } catch (error: any) {
-      console.log(error);
       next(new ErrorResponse(error["message"], 500));
     }
   };
@@ -70,7 +67,6 @@ export class Level1Controller {
         results: rows,
       });
     } catch (error: any) {
-      console.log(error);
       next(new ErrorResponse(error["message"], 500));
     }
   };
@@ -84,7 +80,6 @@ export class Level1Controller {
         results: rows,
       });
     } catch (error: any) {
-      console.log(error);
       next(new ErrorResponse(error["message"], 500));
     }
   };

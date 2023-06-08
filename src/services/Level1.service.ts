@@ -1,12 +1,11 @@
-import { IFilm } from "../interfaces/IFilm.interface";
 import { ILevel1Service } from "../interfaces/ILevel1.interface";
 import { ActorRepository } from "../repositories/Actor.repository";
 import { FilmRepository } from "../repositories/Film.repository";
 
 export class Level1Service implements ILevel1Service {
   constructor(
-    private actorRepository: ActorRepository = new ActorRepository(),
-    private filmRepository: FilmRepository = new FilmRepository()
+    private readonly actorRepository: ActorRepository = new ActorRepository(),
+    private readonly filmRepository: FilmRepository = new FilmRepository(),
   ) {}
 
   async bai1() {
