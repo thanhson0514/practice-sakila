@@ -17,6 +17,8 @@
   "rules": {
     "no-console": ["error", { "allow": ["info", "error"] }],
     "no-inline-comments": "error",
-    "@typescript-eslint/no-empty-interface": "error"
+    "@typescript-eslint/no-empty-interface": "error",
+    "semi": "off",
+    "@typescript-eslint/semi": "error"
   }
 }

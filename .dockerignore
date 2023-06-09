@@ -1,0 +1,15 @@
+Dockerfile
+docker*.yml
+
+.git
+.gitignore
+.config
+
+
+node_modules
+*lock.json
+dist
+
+.github
+
+README.md

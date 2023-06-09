@@ -72,4 +72,48 @@ export class FilmRepository extends BaseRepository<IFilm> {
     const [rows, fields] = await this.sql.query<IFilm[]>(sqlCommand);
     return rows;
   }
+
+  async getTitleAllFilmsRentedMoreThan50CustomersNeverSameCustomerMoreThan1() {
+    const sqlCommand = `
+      SELECT title
+      FROM film
+      WHERE film.film_id IN (
+        SELECT film.film_id
+        FROM film
+          LEFT JOIN (
+            SELECT
+              inventory.film_id AS 'film_id'
+            FROM
+              inventory
+            INNER JOIN rental ON rental.inventory_id = inventory.inventory_id
+            GROUP BY
+              inventory.film_id,
+              customer_id
+        ) as inventory_rental 
+        ON inventory_rental.film_id = film.film_id
+        GROUP BY film.film_id
+        HAVING COUNT(*) > 50
+      )
+    `;
+
+    const [rows, fields] = await this.sql.query<IFilm[]>(sqlCommand);
+    return rows;
+  }
+
+  async getTitleAllFilmsHasEverRentedFromActionCategory(): Promise<IFilm[]> {
+    const sqlCommand = `
+      SELECT
+        film.title
+      FROM inventory
+        INNER JOIN film_category ON film_category.film_id = inventory.film_id
+        INNER JOIN film ON film.film_id = inventory.film_id
+        INNER JOIN category ON category.category_id = film_category.category_id
+      WHERE
+        category.name LIKE 'Action'
+      GROUP BY film.film_id
+    `;
+
+    const [rows, fields] = await this.sql.query<IFilm[]>(sqlCommand);
+    return rows;
+  }
 }

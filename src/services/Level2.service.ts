@@ -20,7 +20,7 @@ export class Level2Service implements ILevel2Service {
 
   async bai2() {
     const rows =
-      await this.customerRepository.getAllCustomersHaveRentedFilmsInAllCategory();
+      await this.customerRepository.getNameAndContactInfoAllCustomersRentedFilmInAllCategories();
     return rows;
   }
 
@@ -33,6 +33,30 @@ export class Level2Service implements ILevel2Service {
   async bai4(): Promise<IActor[]> {
     const rows =
       await this.actorRepository.getNameOfAllActorsAppearedLeastOneFilmInEachCategory();
+    return rows;
+  }
+
+  async bai6(): Promise<IActor[]> {
+    const rows =
+      this.actorRepository.getTotalReveueEachActorBaseOnRentalFeeOfFilm();
+    return rows;
+  }
+
+  async bai7(): Promise<IActor[]> {
+    const rows =
+      await this.actorRepository.getNameAllActorsAppearedInLeastOneFilmRatingRNeverAppearedRatingG();
+    return rows;
+  }
+
+  async bai8(): Promise<IFilm[]> {
+    const rows =
+      await this.filmRepository.getTitleAllFilmsRentedMoreThan50CustomersNeverSameCustomerMoreThan1();
+    return rows;
+  }
+
+  async bai10(): Promise<IFilm[]> {
+    const rows =
+      await this.filmRepository.getTitleAllFilmsHasEverRentedFromActionCategory();
     return rows;
   }
 }

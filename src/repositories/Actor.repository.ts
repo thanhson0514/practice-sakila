@@ -54,4 +54,56 @@ export class ActorRepository extends BaseRepository<IActor> {
     const [rows, fields] = await this.sql.query<IActor[]>(sqlCommand);
     return rows;
   }
+
+  async getNameAllActorsAppearedInLeastOneFilmRatingRNeverAppearedRatingG(): Promise<
+    IActor[]
+  > {
+    const sqlCommand = `
+      SELECT first_name, last_name
+      FROM actor
+      WHERE actor_id IN (
+        SELECT actor_rating.actor_id
+        FROM (
+          SELECT actor_id, rating
+          FROM film
+          INNER JOIN film_actor ON film_actor.film_id = film.film_id
+          GROUP BY actor_id, rating
+          HAVING
+            rating LIKE 'R'
+            OR rating LIKE 'G'
+        ) as actor_rating
+        GROUP BY actor_rating.actor_id
+        HAVING COUNT(*) < 2
+      )
+    `;
+
+    const [rows, fields] = await this.sql.query<IActor[]>(sqlCommand);
+    return rows;
+  }
+
+  async getTotalReveueEachActorBaseOnRentalFeeOfFilm(): Promise<IActor[]> {
+    const sqlCommand = `
+      SELECT 
+        actor.first_name, 
+        actor.last_name, 
+        SUM(film_inventory.quantity_of_rental) as 'the total revenue'
+      FROM film_actor
+      INNER JOIN (
+        SELECT film.title, inventory.film_id, film.rental_rate * COUNT(*) as quantity_of_rental 
+        FROM rental
+        INNER JOIN inventory
+        ON rental.inventory_id = inventory.inventory_id
+        INNER JOIN film
+        ON inventory.film_id = film.film_id
+        GROUP BY inventory.film_id
+      ) as film_inventory
+      ON film_inventory.film_id = film_actor.film_id
+      INNER JOIN actor
+      ON actor.actor_id = film_actor.actor_id
+      GROUP BY actor.actor_id
+    `;
+
+    const [rows, fields] = await this.sql.query<IActor[]>(sqlCommand);
+    return rows;
+  }
 }

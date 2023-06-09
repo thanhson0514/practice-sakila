@@ -29,8 +29,25 @@ export class CustomerRepository extends BaseRepository<ICustomer> {
     return rows;
   }
 
-  async getAllCustomersHaveRentedFilmsInAllCategory(): Promise<ICustomer[]> {
-    const sqlCommand = "";
+  async getNameAndContactInfoAllCustomersRentedFilmInAllCategories(): Promise<
+    ICustomer[]
+  > {
+    const sqlCommand = `
+      SELECT first_name, last_name, email FROM customer
+      WHERE customer_id IN (
+        SELECT customer_category.customer_id FROM (
+              SELECT rental.customer_id, film_category.category_id FROM rental
+              INNER JOIN inventory
+              ON rental.inventory_id = inventory.inventory_id
+              INNER JOIN  film_category
+              ON film_category.film_id = inventory.film_id
+              GROUP BY rental.customer_id, film_category.category_id
+          ) as customer_category
+          GROUP BY customer_category.customer_id
+          HAVING COUNT(*) = (SELECT COUNT(*) FROM category)
+      )
+    `;
+
     const [rows, fields] = await this.sql.query<ICustomer[]>(sqlCommand);
     return rows;
   }
