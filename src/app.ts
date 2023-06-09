@@ -8,8 +8,8 @@ dotenv.config({
   path: ".env",
 });
 
-import router from "./src/routers";
-import { error } from "./src/middlewares/error";
+import router from "./routers";
+import { error } from "./middlewares/error";
 
 const app: Express = express();
 
